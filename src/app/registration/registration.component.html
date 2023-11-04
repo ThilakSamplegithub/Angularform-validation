@@ -1,0 +1,96 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" formControlName="name">
+      <!-- Error messages for the 'name' field -->
+      <div *ngIf="registrationForm?.get('name')?.invalid && registrationForm?.get('name')?.touched">
+        <div *ngIf="registrationForm?.get('name')?.hasError('required')">Name is required.</div>
+        <div *ngIf="registrationForm?.get('name')?.hasError('minlength')">Name must be at least 3 characters long.</div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" formControlName="email">
+      <!-- Error messages for the 'email' field -->
+      <div *ngIf="registrationForm?.get('email')?.invalid && registrationForm?.get('email')?.touched">
+        <div *ngIf="registrationForm?.get('email')?.hasError('required')">Email is required.</div>
+        <div *ngIf="registrationForm?.get('email')?.hasError('email')">Please enter a valid email address.</div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+        required
+        minlength="6"
+      />
+      <!-- Error messages for the 'password' field -->
+      <div
+        *ngIf="
+          registrationForm?.get('password')?.invalid &&
+          registrationForm?.get('password')?.touched
+        "
+      >
+        <div *ngIf="registrationForm?.get('password')?.hasError('required')">
+          Password is required.
+        </div>
+        <div *ngIf="registrationForm?.get('password')?.hasError('minlength')">
+          Password must be at least 6 characters long.
+        </div>
+        <div *ngIf="registrationForm?.get('password')?.hasError('passwordStrength')">
+          Password should contain a combination of at least one uppercase letter,
+          one lowercase letter, one digit, and one special character.
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        formControlName="confirmPassword"
+        required
+      >
+      <!-- Error messages for the 'confirmPassword' field -->
+      <div
+        *ngIf="
+          registrationForm?.get('confirmPassword')?.invalid &&
+          registrationForm?.get('confirmPassword')?.touched
+        "
+      >
+        <div *ngIf="registrationForm?.get('confirmPassword')?.hasError('required')">
+          Confirm Password is required.
+        </div>
+        <!-- <div *ngIf="registrationForm?.get('confirmPassword')?.hasError('passwordMismatch')">
+          Passwords do not match.
+        </div> -->
+        <div *ngIf="registrationForm.hasError('passwordMismatch')">
+          Passwords do not match.
+        </div>
+        
+      </div>
+    </div>
+    
+  
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" formControlName="phoneNumber">
+      <!-- Error messages for the 'phoneNumber' field -->
+      <div *ngIf="registrationForm?.get('phoneNumber')?.invalid && registrationForm?.get('phoneNumber')?.touched">
+        <div *ngIf="registrationForm?.get('phoneNumber')?.hasError('pattern')">Please enter a valid phone number (e.g., (123) 456-7890).</div>
+      </div>
+    </div>
+  
+    <button type="submit">Register</button>  
+  </form>
+  <!-- <div class="success-message" *ngIf="submitted && registrationForm.valid">
+    Registration successful!
+  </div> -->
+  
